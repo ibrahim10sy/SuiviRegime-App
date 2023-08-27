@@ -1,0 +1,91 @@
+
+.btn-add{
+    float: right;
+    margin-right: 1.5rem;
+    flex: 1;
+}
+.btn-add button {
+    background-color: #FA314E;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+.container-home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 20px;
+  }
+  
+  .container-h {
+    
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+  }
+  
+  .nom {
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  .desc {
+    color: #555;
+    margin-top: 3px;
+  }
+  
+  .calories {
+    margin-top: 3px;
+  }
+  
+  .btn-home {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  
+  .btn-home button {
+    flex: 1;
+    display : flex;
+    gap : 8px;
+    align-items : center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  .btn-home button span {
+    font-size : 18px;
+  }
+  .btn-home button:first-child {
+    margin-right: 5px;
+  }
+  
+  .btn-home button:last-child {
+    margin-left: 5px;
+  }
+  
+  .btn-home button:hover {
+    background-color: #0056b3;
+  }
+  .pagination{
+    text-align : center;
+  }
