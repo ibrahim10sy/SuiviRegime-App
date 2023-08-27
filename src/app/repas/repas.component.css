@@ -3,6 +3,10 @@
     float: right;
     margin-right: 1.5rem;
     flex: 1;
+    margin : 1rem;
+}
+h1{
+  margin: 1rem;
 }
 .btn-add button {
     background-color: #FA314E;

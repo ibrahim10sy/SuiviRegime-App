@@ -1,1 +1,29 @@
-<p>planification-repas works!</p>
+<h1>Le planing</h1>
+<div class="container">
+
+<div class="form">
+   
+  <form [formGroup]="planingForm" (ngSubmit)="onSubmit()">
+        <div>
+          <input type="text" id="nom" formControlName="nom" required placeholder="Nom">
+        </div>
+        <div>
+          <input type="text" id="description" formControlName="description" required placeholder="Description">
+        </div>
+        <div>
+          <select name="selectedRepas" id="selectedRepas" formControlName="repas">
+            <option value="" placeholder="Repas">Sélectionnez un repas</option>
+            <option *ngFor="let repas of repasSelect" [ngValue]="repas">{{ repas.nom }}</option>
+         </select>
+        </div>
+        <div>
+            <input type="date" id="jour" formControlName="jour" required placeholder="Jour">
+          </div>
+          <button type="submit" [disabled]="!planingForm.valid">Ajouter</button>
+      </form>
+</div>
+<div class="img">
+    <img src="../../assets/image/repas-rapides.jpg" alt="">
+</div>
+
+</div>

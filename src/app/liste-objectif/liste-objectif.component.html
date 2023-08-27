@@ -1,1 +1,19 @@
-<p>liste-objectif works!</p>
+
+<div class="container">
+    <h1>Liste des objectifs</h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Calories</th>
+            <th>Evolution</th>
+        </tr>
+        <tr *ngFor="let liste of listeService">
+            <td>{{liste.id}}</td>
+            <td>{{liste.nom}}</td>
+            <td>{{liste.description}}</td>
+            <td>{{liste.caloriesCibler}}</td>
+        </tr>
+    </table>
+</div>

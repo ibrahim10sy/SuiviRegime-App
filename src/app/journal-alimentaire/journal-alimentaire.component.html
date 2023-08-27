@@ -1,1 +1,28 @@
-<p>journal-alimentaire works!</p>
+
+<h1>Le journal alimentaire</h1>
+    <div class='container-home'>
+        <div *ngFor="let plan of planing" class="container-h">
+            <!-- <img [src]="image" alt=""> -->
+            <p class="nom">{{plan.nom}}</p>
+            <p class='desc'>{{plan.description}}</p>
+            <p class='desc'>{{plan.jour}}</p>
+            <div class='btn-home'>
+                <button style="background-color: #CCCE32;">Modifier</button>
+                <button style="background-color: #FA314E;">Supprimer</button>
+            </div>
+    
+        </div>
+    </div>
+
+    <div class='container-home'>
+        <div *ngFor="let journal of listePlaning" class="container-h">
+            <p class="nom">{{journal.nom}}</p>
+            <p class='desc'>{{journal.description}}</p>
+            <p class='desc'>{{journal.jour}}</p>
+            <div class='btn-home'>
+                <button style="background-color: #CCCE32;">Modifier</button>
+                <button style="background-color: #FA314E;">Supprimer</button>
+            </div>
+    
+        </div>
+    </div>
