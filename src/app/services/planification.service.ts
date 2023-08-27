@@ -8,6 +8,20 @@ import { RepasService } from './repas.service';
 })
 export class PlanificationService {
 
-  private listePlaning = [] = []
+  private listePlaning = [] = [];
+  private idCount = 1;
+
+  //ajout du planing
+
+  // ajoutPlaning(planing : Planification){
+  //   planing.id = this.idCount;
+  //   this.listePlaning.push(planing);
+  //   this.idCount++;
+  // }
+  // AjoutPlaning(planing : Planification){
+  //   planing.id = this.idCount;
+  //   this.listePlaning.push(planing);
+  //   this.idCount++;
+  // }
   
 }

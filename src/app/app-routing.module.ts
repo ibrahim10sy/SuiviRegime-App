@@ -6,6 +6,7 @@ import { JournalAlimentaireComponent } from './journal-alimentaire/journal-alime
 import { PlanificationRepasComponent } from './planification-repas/planification-repas.component';
 import { SuiviObjectifsComponent } from './suivi-objectifs/suivi-objectifs.component';
 import { RepasComponent } from './repas/repas.component';
+import { ListeObjectifComponent } from './liste-objectif/liste-objectif.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'repaspage', pathMatch: 'full' },   
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'addRepas', component: AddRepasComponent },
   { path: 'journal', component: JournalAlimentaireComponent },
   { path: 'planification', component: PlanificationRepasComponent },
-  { path: 'suivi', component: SuiviObjectifsComponent }
+  { path: 'suivi', component: SuiviObjectifsComponent },
+  { path: 'liste', component: ListeObjectifComponent }
 ];
 
 @NgModule({

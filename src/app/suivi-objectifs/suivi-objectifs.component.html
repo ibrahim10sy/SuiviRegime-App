@@ -1,1 +1,30 @@
-<p>suivi-objectifs works!</p>
+
+<div class="header">
+    <h1>Objectifs d'utilisation</h1>
+    <div class="link">
+        <a routerLink="/liste">Liste des objectifs</a>
+    </div>
+   
+</div>
+<div class="container">
+<div class="form">
+    <form [formGroup]="objectifForm" (ngSubmit)="onSubmit()">
+       
+        <div>
+          <input type="text" id="nom" formControlName="nom" required placeholder="Nom">
+        </div>
+        <div>
+          <input type="text" id="description" formControlName="description" required placeholder="Description">
+        </div>
+        <div>
+            <input class="calorie" type="number"  formControlName="caloriesCibler" placeholder="calories cibler" required>
+          </div>
+      </form>
+      <button  type="submit" [disabled]="!objectifForm.valid">Ajouter</button>
+
+</div>
+<div class="img">
+    <img src="../../assets/image/meilleures-recettes-air-fryer.jpg" alt="">
+</div>
+
+</div>
