@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog'
-// import {NgxPaginationModule} from 'ngx-pagination';
+import { MatDialogModule } from '@angular/material/dialog'
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // NgxPaginationModule,
+    NgxPaginationModule,
     MatDialogModule,
     ReactiveFormsModule,
     BrowserAnimationsModule

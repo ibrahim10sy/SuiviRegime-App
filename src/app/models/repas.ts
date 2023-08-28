@@ -4,6 +4,7 @@ export class Repas {
         public nom: string,
         public description: string,
         public calories: number,
-        public image: string
+        public image: string,
+        public consommer: boolean
     ) { }
 }

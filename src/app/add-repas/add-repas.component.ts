@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Repas } from '../models/repas';
 import { RepasService } from '../services/repas.service';
 
-
 @Component({
   selector: 'app-add-repas',
   templateUrl: './add-repas.component.html',
@@ -11,15 +10,10 @@ import { RepasService } from '../services/repas.service';
 })
 export class AddRepasComponent implements OnInit {
 
-  nouveauRepas = new Repas(1, '', '', 0, '');
-
   repasForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private repasService: RepasService) { }
-
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder, private repasService: RepasService) {
     this.repasForm = this.formBuilder.group({
-      id: [null],
       nom: ['', Validators.required],
       description: ['', Validators.required],
       calories: ['', Validators.required],
@@ -27,12 +21,27 @@ export class AddRepasComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+  
+  }
+
   onSubmit() {
     if (this.repasForm.valid) {
-      this.nouveauRepas = this.repasForm.value;
-      this.repasService.ajoutRepas(this.nouveauRepas);
-      console.warn(this.nouveauRepas);
+      const nouveauRepas = this.repasForm.value as Repas;
+      this.repasService.ajoutRepas(nouveauRepas);
+      console.warn(nouveauRepas)
       this.repasForm.reset();
+    }
+  }
+
+  ImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.repasForm.patchValue({ image: e.target.result });
+      };
+      reader.readAsDataURL(file);
     }
   }
 

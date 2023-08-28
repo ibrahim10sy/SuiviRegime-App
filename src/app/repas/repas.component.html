@@ -6,8 +6,9 @@
     <h1>La liste des repas</h1>
     <div>
         <div class='container-home'>
-            <div *ngFor="let repas of plat " class="container-h">
-                <img [src]="repas.image" class='img' />
+            <div *ngFor="let repas of plat | paginate: { itemsPerPage: 3, currentPage: p }" class="container-h">
+                <!-- <div *ngIf="> -->
+                <img [src]="repas.image" class='img' alt={{repas.nom}} />
                 <p class="nom">{{repas.nom}}</p>
                 <p class='desc'>{{repas.description}}</p>
                 <p class='calories '>Calories :{{repas.calories}}</p>
@@ -22,5 +23,8 @@
                 </div>
             </div>
         </div>
-       
+        <div class="pagination">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
     </div>
+</div>

@@ -12,17 +12,12 @@ import { RepasService } from '../services/repas.service';
 })
 export class PlanificationRepasComponent {
 
-  newPlaning  = new Planification(1,'','',[],'');
+  // newPlaning  = new Planification(1,'','',[],'');
   repasSelect : Repas [] | any;
   planingForm ! : FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private planingService : PlanificationService,  private repService : RepasService){}
+  constructor(private formBuilder: FormBuilder, private planingService : PlanificationService,  private repService : RepasService){
 
-  ngOnInit(){
-    //recuperation des repas dans le composant planification
-
-    this.repasSelect = this.repService.getRepas();
-    
     this.planingForm = this.formBuilder.group({
       id : [null],
       nom : ['', Validators.required],
@@ -30,12 +25,20 @@ export class PlanificationRepasComponent {
       repas : ['', Validators.required],
       jour : ['', Validators.required]
     })
+
+  }
+
+  ngOnInit(){
+    //recuperation des repas dans le composant planification
+
+    this.repasSelect = this.repService.getRepas();
   }
 
   onSubmit(){
     if(this.planingForm.valid){
-      this.newPlaning = this.planingForm.value;
-      this.planingService.ajoutPlaning(this.newPlaning);
+      const newPlaning = this.planingForm.value as Planification;
+      this.planingService.ajoutPlaning(newPlaning);
+      console.warn(newPlaning);
       this.planingForm.reset();
     }
   }

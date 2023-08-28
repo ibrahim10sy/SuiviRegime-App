@@ -70,4 +70,7 @@ h1{
   .btn-home button:hover {
     background-color: #0056b3;
   }
+  .pagination{
+    text-align : center;
+  }
   
