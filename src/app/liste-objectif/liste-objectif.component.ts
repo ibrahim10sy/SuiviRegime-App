@@ -16,6 +16,14 @@ export class ListeObjectifComponent implements OnInit {
 
   ngOnInit(){
     this.listeService= this.service.getObjectifs();
+    const storageLocal= localStorage.getItem('saveObjectif');
+    if(storageLocal){
+      this.listeService=JSON.parse(storageLocal);
+    }
+  }
+
+  supprimer(objet : Objectif){
+    this.service.supprimerObjectifs(objet);
   }
 
 }

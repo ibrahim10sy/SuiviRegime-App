@@ -10,27 +10,30 @@ import { ObjectifService } from '../services/objectif.service';
 })
 export class SuiviObjectifsComponent {
 
-  newObjectifs = new Objectif(1,'','',0);
+  // newObjectifs = new Objectif(1,'','',0);
 
   objectifForm ! : FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private ObjectifService : ObjectifService){}
+  constructor(private formBuilder: FormBuilder, private ObjectifService : ObjectifService){
 
-  ngOnInit(){
     this.objectifForm = this.formBuilder.group({
       id : [null],
       nom : ['', Validators.required],
       description : ['', Validators.required],
-      caloriesCibler : []
+      caloriesCibler : ['', Validators.required]
     })
+  }
+
+  ngOnInit(){
+  
   }
 
   //la methode submit pour envoyer les données du formulaire
 
   onSubmit(){
     if(this.objectifForm.valid){
-      this.newObjectifs = this.objectifForm.value;
-      this.ObjectifService.ajoutObjectif(this.newObjectifs);
+      const newObjectifs = this.objectifForm.value as Objectif;
+      this.ObjectifService.ajoutObjectif(newObjectifs);
       this.objectifForm.reset();
     }
   }

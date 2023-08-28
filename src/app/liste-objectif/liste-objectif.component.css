@@ -13,3 +13,9 @@ th {
 .container{
     margin : 1rem;
 }
+td button {
+    margin-left: 1rem;
+}
+button i {
+    background: red;
+}

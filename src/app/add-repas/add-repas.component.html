@@ -1,4 +1,4 @@
-
+<!-- 
 <h1 mat-dialog-title id="titre"></h1>
 <div mat-dialog-content class="mat-typography">
 
@@ -16,6 +16,32 @@
       <input type="file" id="image" formControlName="image" placeholder="Télécharger l'image" accept="image/jpeg, image/png" (change)="ImageChange($event)"> 
     </div>
    
+    <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid">Ajouter</button>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Annuler</button>
+  </div>
+</div> -->
+<h1 mat-dialog-title id="titre">Ajouter un repas</h1>
+<div mat-dialog-content class="mat-typography">
+  <form [formGroup]="repasForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+      <div class="input-container">
+        <div class="input-field">
+          <input type="text" id="nom" formControlName="nom" placeholder="Nom du repas" required>
+        </div>
+        <div class="input-field">
+          <input type="text" id="description" formControlName="description" placeholder="Description" required>
+        </div>
+        <div class="input-field">
+          <input type="number" id="calories" formControlName="calories" placeholder="Calories" required>
+        </div>
+      </div>
+      <div class="image-container">
+        <input type="file" id="image" formControlName="image" accept="image/jpeg, image/png" (change)="ImageChange($event)">
+      </div>
+    </div>
+
     <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid">Ajouter</button>
   </form>
   <div mat-dialog-actions>

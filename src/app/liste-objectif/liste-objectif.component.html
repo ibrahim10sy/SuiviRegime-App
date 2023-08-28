@@ -8,12 +8,18 @@
             <th>Description</th>
             <th>Calories</th>
             <th>Evolution</th>
+            <th>Action</th>
         </tr>
         <tr *ngFor="let liste of listeService">
             <td>{{liste.id}}</td>
             <td>{{liste.nom}}</td>
             <td>{{liste.description}}</td>
             <td>{{liste.caloriesCibler}}</td>
+            <td></td>
+            <td>
+                <button><i class='bx bxs-edit'></i></button>
+                <button (click)="supprimer(liste)"><i class='bx bxs-trash-alt'></i></button>
+            </td>
         </tr>
     </table>
 </div>

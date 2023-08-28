@@ -11,17 +11,25 @@ export class ObjectifService {
 
   constructor() { }
 
+  //sauve objectif
+  saveObjectif(){
+    localStorage.setItem('listeObjectif', JSON.stringify(this.listeObjectif));
+  }
    //methode permettant l'ajout d'une nouvelle instances
 
    ajoutObjectif(objectifs : Objectif){
     objectifs.id = this.idCount;
     this.listeObjectif.push(objectifs);
     this.idCount++;
+    this.saveObjectif();
   }
 
   //Réccuperation des listes des objectifs
 
   getObjectifs(){
+    // return this.listeObjectif;
+    let data : any = localStorage.getItem('listeObjectif');
+    this.listeObjectif = JSON.parse(data) || [];
     return this.listeObjectif;
   }
 
@@ -32,6 +40,7 @@ export class ObjectifService {
 
     if(ID !== -1) {
       this.listeObjectif.splice(ID, 1);
+      this.saveObjectif();
     }
   }
 }
