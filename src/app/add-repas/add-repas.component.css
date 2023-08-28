@@ -16,14 +16,17 @@ input, select, option:focus{
     outline: none;
 }
  button{
-    width: 100px !important;
-    height:2.5rem;
-    margin-top : 2rem;
-    border: none;
-    cursor : pointer;
-    border-radius : 20px;
-    color : #fff;
-    background :  #FA314E;
+  flex: 1;
+  display : flex;
+  gap : 8px;
+  align-items : center;
+  background-color: #FA314E;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
 }
  button:first-child {
     margin-right: 5px;
@@ -76,6 +79,40 @@ input, select, option:focus{
   }
   .actions {
     display: flex;
+    align-items: center;
+  }
+  i{
+    font-size: 18px;
+  }
+  .img{
+    position: absolute;
+    top: 28%;
+    right :14%;
+    height:180px;
+  }
+  img{
+    width:150px;
+    height:150px;
+  }
+  i
+   input[type="file"]::file-selector-button {
+    display: none;
+  }
+  input[type="file"]:focus + label {
+    outline: 2px solid #3498db;
+    outline-offset: -2px;
+  }
+  
+  input[type="file"]:valid + label {
+    background-color: #27ae60;
+  }
+  
+ input[type="file"]:valid + label::before {
+    content: "Fichier sélectionné";
+  }
+  
+  input[type="file"]::file-selector-button {
+    display: none;
   }
 /*   
   .img input[type="file"]:focus + label {

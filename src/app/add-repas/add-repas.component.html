@@ -19,12 +19,13 @@
         <input type="file" id="image" class="form-control" formControlName="image" (change)="onFileChange($event)">
       </div>
       <div class="img">
-        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 100px; width: 100px">
+        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px">
+        <!-- <img src="../../assets/image/repas-rapides.jpg"> -->
       </div>
     </div>
     <div mat-dialog-actions class="actions">
-      <button mat-button mat-dialog-close>Annuler</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid">Ajouter</button>
+      <button mat-button mat-dialog-close><i class='bx bx-x'></i> Annuler</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid"> <i class='bx bx-check'></i> Ajouter</button>
     </div>
   </form>
 </div>
