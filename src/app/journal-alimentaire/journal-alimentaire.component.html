@@ -11,9 +11,9 @@
           <p class='desc'>{{journal.jour}}</p>
           <div class='btn-home'>
             <button style="background-color: #CCCE32;">Modifier</button>
-            <button style="background-color: #FA314E;">Supprimer</button>
+            <button style="background-color: #FA314E;" (click)="supprimer(journal)">Supprimer</button>
           </div>
-          <button (click)="marquerRepas(repas)">Marquer comme consommé</button>        
+          <button (click)="marquerRepas(repas)" style="background-color: green;">Marquer comme consommé</button>        
         </div>
       </div>
       <div class="pagination">

@@ -16,6 +16,9 @@ th {
 td button {
     margin-left: 1rem;
 }
-button i {
-    background: red;
+.modifie i {
+    color: green;
+}
+.delete i {
+    color: red;
 }

@@ -52,6 +52,9 @@ export class JournalAlimentaireComponent {
     }
 
 }
+  supprimer(objet : Planification){
+    this.service.supprimerPlaning(objet);
+  }
 
 //methode permettant de marquer un repas comme consommée
   marquerRepas(repas : Repas){

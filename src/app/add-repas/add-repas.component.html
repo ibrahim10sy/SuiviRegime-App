@@ -1,29 +1,7 @@
-<!-- 
-<h1 mat-dialog-title id="titre"></h1>
-<div mat-dialog-content class="mat-typography">
 
-<form [formGroup]="repasForm" (ngSubmit)="onSubmit()">
-    <div>
-      <input type="text" id="nom" formControlName="nom" placeholder="Nom du repas" required>
-    </div>
-    <div>
-      <input type="text" id="nom" formControlName="description" placeholder="Description" required>
-    </div>
-    <div>
-      <input type="number" id="calories" formControlName="calories" placeholder="Calories" required>
-    </div>
-    <div class="img">
-      <input type="file" id="image" formControlName="image" placeholder="Télécharger l'image" accept="image/jpeg, image/png" (change)="ImageChange($event)"> 
-    </div>
-   
-    <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid">Ajouter</button>
-  </form>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Annuler</button>
-  </div>
-</div> -->
 <h1 mat-dialog-title id="titre">Ajouter un repas</h1>
 <div mat-dialog-content class="mat-typography">
+
   <form [formGroup]="repasForm" (ngSubmit)="onSubmit()">
     <div class="form-container">
       <div class="input-container">
@@ -38,13 +16,15 @@
         </div>
       </div>
       <div class="image-container">
-        <input type="file" id="image" formControlName="image" accept="image/jpeg, image/png" (change)="ImageChange($event)">
+        <input type="file" id="image" class="form-control" formControlName="image" (change)="onFileChange($event)">
+      </div>
+      <div class="img">
+        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 100px; width: 100px">
       </div>
     </div>
-
-    <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid">Ajouter</button>
+    <div mat-dialog-actions class="actions">
+      <button mat-button mat-dialog-close>Annuler</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid">Ajouter</button>
+    </div>
   </form>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Annuler</button>
-  </div>
 </div>

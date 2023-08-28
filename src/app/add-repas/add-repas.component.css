@@ -16,7 +16,7 @@ input, select, option:focus{
     outline: none;
 }
  button{
-    width: 100%;
+    width: 100px !important;
     height:2.5rem;
     margin-top : 2rem;
     border: none;
@@ -74,7 +74,9 @@ input, select, option:focus{
     max-width: 100%;
     max-height: 200px;
   }
-  
+  .actions {
+    display: flex;
+  }
 /*   
   .img input[type="file"]:focus + label {
     outline: 2px solid #3498db;
