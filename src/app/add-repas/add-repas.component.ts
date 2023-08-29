@@ -17,7 +17,7 @@ export class AddRepasComponent implements OnInit {
       nom: ['', Validators.required],
       description: ['', Validators.required],
       calories: ['', Validators.required],
-      image: ['', Validators.required]
+      image: [null]
     });
   }
 
@@ -38,16 +38,18 @@ export class AddRepasComponent implements OnInit {
     }
   }
 
-  // ImageChange(event: any) {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       this.repasForm.patchValue({ image: e.target.result });
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
+  //chargement de l'image
+  ImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.repasForm.patchValue({ image: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  //prevusialistion de l'image
   onFileChange(event:any) {
     const reader = new FileReader();
     

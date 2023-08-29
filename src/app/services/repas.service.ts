@@ -53,4 +53,9 @@ export class RepasService {
     }
 
   }
+
+  isRepasExiste(repasId: number): boolean {
+    return this.repasListe.some(r => r.id === repasId);
+  }
+  
 }

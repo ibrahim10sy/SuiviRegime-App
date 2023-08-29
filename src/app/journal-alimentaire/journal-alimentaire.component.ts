@@ -57,8 +57,23 @@ export class JournalAlimentaireComponent {
   }
 
 //methode permettant de marquer un repas comme consommée
-  marquerRepas(repas : Repas){
-    this.repasService.repasConsommee(repas.id);
-    console.warn(repas); 
-  }
+  // marquerRepas(repas : Repas){
+  //   this.repasService.repasConsommee(repas.id);
+  //   console.warn(repas); 
+  // }
+  marquerRepas(repas: Repas): void {
+    if (repas && repas.id) {
+        this.repasService.repasConsommee(repas.id);
+    } else {
+        console.error("L'objet repas ou sa propriété 'id' est indéfini.");
+    }
+}
+//   marquerRepas(repas: Repas): void {
+//     if (repas && repas.id) {
+//         this.repasService.repasConsommee(repas.id);
+//     } else {
+//         console.error("L'objet repas ou sa propriété 'id' est indéfini.");
+//     }
+// }
+
 }
