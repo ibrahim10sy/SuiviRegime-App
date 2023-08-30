@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="image-container">
-        <input type="file" id="image" class="form-control" formControlName="image"  (change)="onFileChange($event)" (change)="ImageChange($event)" accept="image/jpeg, image/png">
+        <input type="file" id="image" class="form-control" formControlName="image" accept="image/jpeg, image/png" (change)="onFileChange($event)" (change)="ImageChange($event)">
       </div>
       <div class="img">
         <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px">

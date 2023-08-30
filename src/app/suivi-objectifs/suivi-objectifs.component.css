@@ -72,3 +72,12 @@ div{
 .calorie{
     width: 380px;
 }
+.link{
+    padding: 5px 10px;
+    background :  #FA314E;
+}
+a{
+    color : #fff;
+    text-decoration : none;
+    transition: background-color 0.3s;
+}
