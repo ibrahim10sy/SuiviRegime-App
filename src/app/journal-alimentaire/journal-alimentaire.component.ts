@@ -10,41 +10,19 @@ import { RepasService } from '../services/repas.service';
   styleUrls: ['./journal-alimentaire.component.css']
 })
 export class JournalAlimentaireComponent {
-  // planing : Planification [] = [
-  //   {
-  //     id: 1,
-  //     nom: "Repas du jour",
-  //     description: "Mes repas du jour pour ne pas perdre du poids",
-  //     repas: [
-  //       new Repas(1, "Salade", "Salade verte fraîche", 100, "salade.jpg", true),
-  //       new Repas(2, "Oeuf sur plat", "Oeuf cuit à la poêle", 150, "oeuf.jpg", true),
-  //       new Repas(3, "Viande boeuf", "Viande de boeuf grillée", 200, "viande.jpg", true)
-  //     ],
-  //     jour: '2023-08-27' 
-  //   },
-  //   {
-  //     id: 2,
-  //     nom: "Repas du jour",
-  //     description: "Mes repas du jour pour ne pas perdre du poids",
-  //     repas: [
-  //       new Repas(1, "Salade", "Salade verte fraîche", 100, "salade.jpg", true),
-  //       new Repas(2, "Oeuf sur plat", "Oeuf cuit à la poêle", 150, "oeuf.jpg", true),
-  //       new Repas(3, "Viande boeuf", "Viande de boeuf grillée", 200, "viande.jpg", true)
-  //     ],
-  //     jour: '2023-08-28' 
-  //   },
-    
-  // ]
+
 
   constructor(private service : PlanificationService, private repasService : RepasService){}
  
   listePlaning : Planification [] = [];
-   repas !:Repas;
+   repas :Repas [] = [];
+   RepasRecup : Repas [] = [];
    p : number = 1;
 
   // planingData: Planifications[] = planing;
   
   ngOnInit() {
+    this.RepasRecup = this.repasService.getRepas();
     this.listePlaning = this.service.getPlaning();
     const storageLocal = localStorage.getItem('savePlanification');
     if(storageLocal){
@@ -56,18 +34,6 @@ export class JournalAlimentaireComponent {
     this.service.supprimerPlaning(objet);
   }
 
-//methode permettant de marquer un repas comme consommée
-  // marquerRepas(repas : Repas){
-  //   this.repasService.repasConsommee(repas.id);
-  //   console.warn(repas); 
-  // }
-  marquerRepas(repas: Repas): void {
-    if (repas && repas.id) {
-        this.repasService.repasConsommee(repas.id);
-    } else {
-        console.error("L'objet repas ou sa propriété 'id' est indéfini.");
-    }
-}
 //   marquerRepas(repas: Repas): void {
 //     if (repas && repas.id) {
 //         this.repasService.repasConsommee(repas.id);
@@ -75,5 +41,27 @@ export class JournalAlimentaireComponent {
 //         console.error("L'objet repas ou sa propriété 'id' est indéfini.");
 //     }
 // }
+// repasConsommee(repasId:number):void{
+//   const repas = this.repas.find(index => index.id === repasId);
+//   if(repas){
+//     repas.consommer = true;
+//     this.repas.push(repas);
+   
+//   }
+
+repasConsommee(repasId: number): void {
+  const repas = this.repas.find(journal => journal.id === repasId);
+  if (repas) {
+    repas.consommer = true;
+    this.RepasRecup.push(repas); // Utilisez la liste repasConsommes au lieu de repas
+    console.warn(repas);
+    
+    localStorage.setItem('savePlanification', JSON.stringify(this.listePlaning));
+  } else {
+    console.error("Repas introuvable ou propriété 'id' non définie.");
+  }
+}
+
+
 
 }
