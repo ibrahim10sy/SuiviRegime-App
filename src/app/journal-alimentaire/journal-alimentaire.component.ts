@@ -30,9 +30,27 @@ export class JournalAlimentaireComponent {
     }
 
 }
-  supprimer(objet : Planification){
-    this.service.supprimerPlaning(objet);
+supprimer(planing : Planification){
+  const ID = this.listePlaning.findIndex(index => index.id == planing.id);
+
+  if(ID !== -1){
+    this.listePlaning.splice(ID , 1);
+   
+  } else{
+    console.log('Impossible de supprimer')
   }
+}
+// supprimer(planing : Planification) {
+//   const message = "Attention vous allez supprimer";
+//   if(planing){
+//     if (window.confirm(message)) {
+//       this.service.supprimerPlaning(planing);
+//   }
+//   }else{
+//     console.log("Impossible de supprimer");
+//   }
+  
+// }
 
 //   marquerRepas(repas: Repas): void {
 //     if (repas && repas.id) {
@@ -50,16 +68,17 @@ export class JournalAlimentaireComponent {
 //   }
 
 repasConsommee(repasId: number): void {
-  const repas = this.repas.find(journal => journal.id === repasId);
+  const repas = this.RepasRecup.find(journal => journal.id === repasId);
   if (repas) {
     repas.consommer = true;
-    this.RepasRecup.push(repas); // Utilisez la liste repasConsommes au lieu de repas
-    console.warn(repas);
+    this.repas.push(repas); // Utilisez la liste repasConsommes au lieu de repas
+    console.log('repas consommée est : ', repasId);
     
     localStorage.setItem('savePlanification', JSON.stringify(this.listePlaning));
   } else {
     console.error("Repas introuvable ou propriété 'id' non définie.");
-  }
+    console.warn('repasId', repasId);
+    } 
 }
 
 

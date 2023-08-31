@@ -7,7 +7,7 @@
     <div class='container-home'>
         <div *ngFor="let journal of listePlaning | paginate: { itemsPerPage: 3, currentPage: p }" class="container-h">
           <p class="nom">Repas : {{journal.nom}}</p>
-          <p class='desc'>Desc : {{journal.description}}</p>
+          <p class='desc'>Description : {{journal.description}}</p>
           <p class='desc'>Jour : {{journal.jour}}</p>
           <div class='btn-home'>
             <button style="background-color: #CCCE32;">Modifier</button>

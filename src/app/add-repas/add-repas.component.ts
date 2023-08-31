@@ -17,7 +17,7 @@ export class AddRepasComponent implements OnInit {
       nom: ['', Validators.required],
       description: ['', Validators.required],
       calories: ['', Validators.required],
-      image: [null]
+      image: ['', Validators.required],
     });
   }
 
@@ -69,7 +69,5 @@ export class AddRepasComponent implements OnInit {
    
     }
   }
-  deleteRepas(repas: Repas) {
-    this.repasService.supprimerRepas(repas);
-  }
+ 
 }

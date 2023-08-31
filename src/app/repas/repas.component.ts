@@ -27,10 +27,12 @@ export class RepasComponent implements OnInit {
   }
 
   supprimerRepas(repas: Repas) {
-    this.repasService.supprimerRepas(repas);
-    // this.plat = this.repasService.getRepas();
+    const message = "Attention vous allez supprimer";
+    if (window.confirm(message)) {
+        this.repasService.supprimerRepas(repas);
+    }
+}
 
-  }
  
   openDialog(): void {
     const dialogRef = this.dialog.open(AddRepasComponent, {
