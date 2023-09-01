@@ -24,29 +24,37 @@ export class JournalAlimentaireComponent implements OnInit {
   ngOnInit(): void {
     
     //recuperation des repas
-    const repas = localStorage.getItem('savePlat');
-    if (repas) {
-      this.listeRepas = JSON.parse(repas);
-      console.warn(this.listeRepas);
-    }
+    this.listeRepas = this.repasService.getRepas();
+    // const repas = localStorage.getItem('savePlat');
+    // if (repas) {
+    //   this.listeRepas = JSON.parse(repas);
+    //   console.warn(this.listeRepas);
+    // }
     //receuperation des planifications
     const depotLocal = localStorage.getItem('savePlanification');
     if (depotLocal) {
       this.liste = JSON.parse(depotLocal);
       console.warn(this.liste);
     }
-
   }
-
+  
   //marquer les repas comme consommées
   repasConsommee(repasId: number): void {
+    //verification des repas recuperer 
+    console.log("id du repas"+repasId);
+    console.log("le repas liste " + this.listeRepas);
+
+    //filtrage des repas par id
     const repas = this.listeRepas.find(index => index.id === repasId);
-    if (repas) {
+    if (repas && repas.id) {
+    
+      //mise a jour des repas comme consommée
       repas.consommer = true;
-      this.consommer.push(repas); // Utilisez la liste repasConsommes au lieu de repas
+      this.consommer.push(repas); 
       console.log('repas consommée est : ', repasId);
       
-      localStorage.setItem('savePlanification', JSON.stringify(this.liste));
+      
+      //  localStorage.setItem('savePlanification', JSON.stringify(this.liste));
     } else {
       // console.error("Repas introuvable ou propriété 'id' non définie.");
       // console.warn('repasId', repasId);
