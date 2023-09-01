@@ -1,8 +1,11 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Repas } from '../models/repas';
 import { PlanificationService } from '../services/planification.service';
 import { Planification } from '../models/planification';
 import { RepasService } from '../services/repas.service';
+import Swal from 'sweetalert2';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @Component({
   selector: 'app-journal-alimentaire',
@@ -10,19 +13,19 @@ import { RepasService } from '../services/repas.service';
   styleUrls: ['./journal-alimentaire.component.css']
 })
 export class JournalAlimentaireComponent implements OnInit {
-  
-  liste : Planification [] = [];
-  listeRepas : Repas [] = [];
-  consommer : Repas[] = [];
-  p : number = 1;
+
+  liste: Planification[] = [];
+  listeRepas: Repas[] = [];
+  consommer: Repas[] = [];
+  p: number = 1;
   constructor(
     private planificationService: PlanificationService,
     private repasService: RepasService
   ) { }
-  
-  
+
+
   ngOnInit(): void {
-    
+
     //recuperation des repas
     this.listeRepas = this.repasService.getRepas();
     // const repas = localStorage.getItem('savePlat');
@@ -37,44 +40,77 @@ export class JournalAlimentaireComponent implements OnInit {
       console.warn(this.liste);
     }
   }
-  
+
   //marquer les repas comme consommées
   repasConsommee(repasId: number): void {
     //verification des repas recuperer 
-    console.log("id du repas"+repasId);
+    console.log("id du repas" + repasId);
     console.log("le repas liste " + this.listeRepas);
 
     //filtrage des repas par id
     const repas = this.listeRepas.find(index => index.id === repasId);
     if (repas && repas.id) {
-    
+
       //mise a jour des repas comme consommée
       repas.consommer = true;
-      this.consommer.push(repas); 
+      this.consommer.push(repas);
       console.log('repas consommée est : ', repasId);
-      
-      
+
+
       //  localStorage.setItem('savePlanification', JSON.stringify(this.liste));
     } else {
-      // console.error("Repas introuvable ou propriété 'id' non définie.");
-      // console.warn('repasId', repasId);
+
       console.error("repas introuvable");
-      } 
+    }
 
-}
+  }
 
-supprimer(planing: Planification): void {
-  const message = "Attention, vous allez supprimer cette planification.";
-  
-  if (planing) {
-    if (window.confirm(message)) {
+  supprimer(planing: Planification): void {
+
+    if (planing) {
       this.planificationService.supprimerPlaning(planing);
-      this.liste = this.liste.filter(p => p !== planing); // Mettez à jour la liste locale
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "Attention avous allez supprimer",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Supprimer avec succèss',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
+      this.liste = this.liste.filter(p => p !== planing);
       localStorage.setItem('savePlanification', JSON.stringify(this.liste)); // Assurez-vous d'utiliser la bonne clé
     }
-  } else {
-    console.log("Impossible de supprimer : planing indéfini.");
+    else {
+      console.log("Impossible de supprimer : planing indéfini.");
+    }
+
+
   }
 }
 
-}

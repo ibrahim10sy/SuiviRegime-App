@@ -17,6 +17,8 @@ import { RepasComponent } from './repas/repas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ImageViewComponent } from './image-view/image-view.component';
+import { EditRepasComponent } from './edit-repas/edit-repas.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { ImageViewComponent } from './image-view/image-view.component';
     AddRepasComponent,
     ListeObjectifComponent,
     RepasComponent,
-    ImageViewComponent
+    ImageViewComponent,
+    EditRepasComponent
 
   ],
   imports: [
@@ -38,6 +41,7 @@ import { ImageViewComponent } from './image-view/image-view.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatCheckboxModule
    
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {}},

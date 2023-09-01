@@ -1,0 +1,116 @@
+form{
+    display: flex;
+    flex-wrap : wrap;
+    gap: 1rem;
+    margin : 4rem 1rem 0 1rem;
+}
+input , select, option {
+    width : 180px;
+    height : 2.5rem;
+    border-radius : 10px;
+    border : none;
+    background :  #EFF0F4;
+    text-align : center;
+}
+input, select, option:focus{
+    outline: none;
+}
+ button{
+  flex: 1;
+  display : flex;
+  gap : 8px;
+  align-items : center;
+  background-color: #FA314E;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+ button:first-child {
+    margin-right: 5px;
+  }
+  
+ button:last-child {
+    margin-left: 5px;
+  } 
+  
+ button:hover {
+    background-color: #CCCE32;
+  }
+  
+
+#image{
+  height:180px;
+}
+  
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .input-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .image-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .image-preview img {
+    max-width: 100%;
+    max-height: 200px;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+  i{
+    font-size: 18px;
+  }
+  .img{
+    position: absolute;
+    top: 28%;
+    right :14%;
+    height:180px;
+  }
+  img{
+    width:150px;
+    height:150px;
+  }
+  
+   input[type="file"]::file-selector-button {
+    display: none;
+  }
+  input[type="file"]:focus + label {
+    outline: 2px solid #3498db;
+    outline-offset: -2px;
+  }
+  
+  input[type="file"]:valid + label {
+    background-color: #27ae60;
+  }
+  
+ input[type="file"]:valid + label::before {
+    content: "Fichier sélectionné";
+  }
+  
+  input[type="file"]::file-selector-button {
+    display: none;
+  }

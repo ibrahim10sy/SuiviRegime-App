@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Objectif } from '../models/objectif';
 import { ObjectifService } from '../services/objectif.service';
 import { MAT_DIALOG_DATA , MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-suivi-objectifs',
@@ -48,6 +49,13 @@ export class SuiviObjectifsComponent {
         console.log(this.data)
       } else{
         this.ObjectifService.ajoutObjectif(newObjectifs);
+        Swal.fire({
+          position: 'top-left',
+          icon: 'success',
+          title: 'Repas ajouté avec succèss',
+          showConfirmButton: false,
+          timer: 1500
+        })
          console.log(this.data)
         this.objectifForm.reset();
       }

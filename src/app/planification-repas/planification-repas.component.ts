@@ -4,6 +4,7 @@ import { Planification } from '../models/planification';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Repas } from '../models/repas';
 import { RepasService } from '../services/repas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-planification-repas',
@@ -38,7 +39,14 @@ export class PlanificationRepasComponent {
     if(this.planingForm.valid){
       const newPlaning = this.planingForm.value as Planification;
       this.planingService.ajoutPlaning(newPlaning);
-      console.warn(newPlaning);
+      Swal.fire({
+        position: 'center-end',
+        icon: 'success',
+        title: 'Repas ajouté avec succèss',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
       this.planingForm.reset();
     }
   }
