@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog'
+import Swal from 'sweetalert2'
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,6 +16,7 @@ import { ListeObjectifComponent } from './liste-objectif/liste-objectif.componen
 import { RepasComponent } from './repas/repas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ImageViewComponent } from './image-view/image-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SuiviObjectifsComponent,
     AddRepasComponent,
     ListeObjectifComponent,
-    RepasComponent
+    RepasComponent,
+    ImageViewComponent
 
   ],
   imports: [
@@ -34,9 +37,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatDialogModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+   
   ],
-  providers: [],
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MatDialogRef, useValue: {}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

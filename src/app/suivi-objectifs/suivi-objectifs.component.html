@@ -1,6 +1,7 @@
 
 <div class="header">
-    <h1>Objectifs d'utilisation</h1>
+    <h1 *ngIf="!data">Objectifs d'utilisation</h1>
+    <h1 *ngIf="data">modifier d'utilisation</h1>
     <div class="link">
         <a routerLink="/liste">Liste des objectifs</a>
     </div>
@@ -19,7 +20,7 @@
         <div>
             <input class="calorie" type="number"  formControlName="caloriesCibler" placeholder="calories cibler" required>
           </div>
-          <button  type="submit" [disabled]="!objectifForm.valid">Ajouter</button>
+          <button  type="submit" [disabled]="!objectifForm.valid">{{data !== undefined ? 'Modifier': 'Ajouter'}}</button>
 
       </form>
 </div>

@@ -43,4 +43,14 @@ export class ObjectifService {
       this.saveObjectif();
     }
   }
+
+  //modifier objectif
+  modifierObjectif(objectifs : Objectif){
+    const ID = this.listeObjectif.findIndex(index => index.id === objectifs.id);
+
+    if(ID !== -1 ){
+      this.listeObjectif[ID] = objectifs;
+      this.saveObjectif();
+    }
+}
 }

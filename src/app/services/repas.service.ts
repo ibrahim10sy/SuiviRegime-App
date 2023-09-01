@@ -19,7 +19,7 @@ export class RepasService {
 
   //ajout de repas
   ajoutRepas(repas : Repas) {
-    repas.id = this.idCount;
+    repas.id = this.idCount; 
     this.repasListe.push(repas);
     this.idCount++;
     this.saveRepas();//sauve apres ajout de nouveau repas

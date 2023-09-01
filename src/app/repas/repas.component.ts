@@ -3,6 +3,8 @@ import { RepasService } from '../services/repas.service';
 import { AddRepasComponent } from '../add-repas/add-repas.component';
 import { MatDialog } from '@angular/material/dialog'
 import { Repas } from '../models/repas';
+import Swal from 'sweetalert2'
+import { ImageViewComponent } from '../image-view/image-view.component';
 
 @Component({
   selector: 'app-repas',
@@ -13,6 +15,8 @@ export class RepasComponent implements OnInit {
 
  plat: any[] = [];
   p: number = 1;
+  imageSrc : string | any;
+
   constructor(private repasService: RepasService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -27,11 +31,48 @@ export class RepasComponent implements OnInit {
   }
 
   supprimerRepas(repas: Repas) {
-    const message = "Attention vous allez supprimer";
-    if (window.confirm(message)) {
+    
         this.repasService.supprimerRepas(repas);
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "Attention avous allez supprimer",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Supprimer avec succèss',
+              'success'
+            )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              'Cancelled',
+              'Your imaginary file is safe :)',
+              'error'
+            )
+          }
+        })
     }
-}
+    afficherImage(repas: Repas) {
+      const dialogRef = this.dialog.open(ImageViewComponent, {
+        data: { imageUrl: repas.image } 
+      });
+    }
 
  
   openDialog(): void {

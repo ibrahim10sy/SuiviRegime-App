@@ -1,22 +1,22 @@
-
 <div class="container">
 
 
-<h1>Le liste alimentaire</h1>
+  <h1>Le journal alimentaire</h1>
+  
+  <div class='container-home'>
+  <div *ngFor="let Liste of liste | paginate: { itemsPerPage: 3, currentPage: p }" class="container-h">
+    <p class="nom">Repas :{{Liste.nom}}</p>
+    <p class='desc'>Description : {{Liste.description}}</p>
+    <p class='desc'>Jours : {{Liste.jour}}</p>
 
-    <div class='container-home'>
-        <div *ngFor="let journal of listePlaning | paginate: { itemsPerPage: 3, currentPage: p }" class="container-h">
-          <p class="nom">Repas : {{journal.nom}}</p>
-          <p class='desc'>Description : {{journal.description}}</p>
-          <p class='desc'>Jour : {{journal.jour}}</p>
-          <div class='btn-home'>
-            <button style="background-color: #CCCE32;">Modifier</button>
-            <button style="background-color: #FA314E;" (click)="supprimer(journal)">Supprimer</button>
-          </div>
-          <button (click)="repasConsommee(journal.id)" style="background: green; color: #fff; margin-top: 10px; border: none; padding: 5px 10px;">Marquer comme consommé</button>
-        </div>
-      </div>
-      <div class="pagination">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div class='btn-home'>
+      <button style="background-color: #CCCE32;">Modifier</button>
+      <button style="background-color: #FA314E;" (click)="supprimer(Liste)" >Supprimer</button>
     </div>
-    </div> 
+    <button  style="background: green; color: #fff; margin-top: 10px; border: none; padding: 5px 10px;" (click)="repasConsommee(Liste.id)">Marquer comme consommé</button>
+    </div>
+  </div>
+  <div class="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+</div>

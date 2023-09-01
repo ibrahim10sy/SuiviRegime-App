@@ -1,6 +1,7 @@
 <div class="container">
 
     <div class="btn-add">
+        <span class="material-symbols-outlined"> add</span>
         <button (click)="openDialog()">Ajouter repas</button>
     </div>
     <h1>La liste des repas</h1>
@@ -8,7 +9,7 @@
         <div class='container-home'>
             <div *ngFor="let repas of plat | paginate: { itemsPerPage: 3, currentPage: p }" class="container-h">
                 <!-- <div *ngIf="> -->
-                <img [src]="repas.image" class='img' alt={{repas.nom}} />
+                <img [src]="repas.image" class='img' alt={{repas.nom}} (click)="afficherImage(repas)" />
                 <p class="nom">{{repas.nom}}</p>
                 <p class='desc'>{{repas.description}}</p>
                 <p class='calories '>Nombre de calories :{{repas.calories}}</p>

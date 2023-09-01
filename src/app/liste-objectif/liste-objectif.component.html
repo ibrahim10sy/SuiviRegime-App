@@ -15,9 +15,9 @@
             <td>{{liste.nom}}</td>
             <td>{{liste.description}}</td>
             <td>{{liste.caloriesCibler}}</td>
-            <td></td>
+            <td>{{liste}}</td>
             <td>
-                <button class="modifie"><i class='bx bxs-edit'></i></button>
+                <button class="modifie" (click)="modifier(liste)"><i class='bx bxs-edit'></i></button> 
                 <button class="delete" (click)="supprimer(liste)"><i class='bx bxs-trash-alt'></i></button>
             </td>
         </tr>

@@ -94,7 +94,7 @@ input, select, option:focus{
     width:150px;
     height:150px;
   }
-  i
+  
    input[type="file"]::file-selector-button {
     display: none;
   }

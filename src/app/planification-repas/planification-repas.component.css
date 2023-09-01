@@ -43,7 +43,12 @@ input, select, option:focus{
     border-radius : 20px;
     color : #fff;
     background :  #FA314E;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
 }
+
  button:first-child {
     margin-right: 5px;
   }
@@ -63,4 +68,7 @@ div{
     align-items: center;
     margin-top : 2.5rem;
     justify-content : center;
+}
+i{
+    font-size: 18px;
 }

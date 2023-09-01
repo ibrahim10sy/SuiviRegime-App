@@ -19,7 +19,7 @@ export class PlanificationRepasComponent {
   constructor(private formBuilder: FormBuilder, private planingService : PlanificationService,  private repService : RepasService){
 
     this.planingForm = this.formBuilder.group({
-      id : [null],
+      id : [''],
       nom : ['', Validators.required],
       description : ['', Validators.required],
       repas : ['', Validators.required],
