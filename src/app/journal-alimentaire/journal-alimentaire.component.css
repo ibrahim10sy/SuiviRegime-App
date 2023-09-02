@@ -87,3 +87,15 @@ h1 {
 .pagination {
   text-align: center;
 }
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}

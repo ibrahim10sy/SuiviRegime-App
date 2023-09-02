@@ -4,7 +4,7 @@ import { PlanificationService } from '../services/planification.service';
 import { Planification } from '../models/planification';
 import { RepasService } from '../services/repas.service';
 import Swal from 'sweetalert2';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @Component({
@@ -23,22 +23,22 @@ export class JournalAlimentaireComponent implements OnInit {
     private repasService: RepasService
   ) { }
 
-
+  saveRepasConsommer() {
+    localStorage.setItem('consommer', JSON.stringify(this.consommer));
+  }
   ngOnInit(): void {
 
     //recuperation des repas
     this.listeRepas = this.repasService.getRepas();
-    // const repas = localStorage.getItem('savePlat');
-    // if (repas) {
-    //   this.listeRepas = JSON.parse(repas);
-    //   console.warn(this.listeRepas);
-    // }
+
     //receuperation des planifications
-    const depotLocal = localStorage.getItem('savePlanification');
-    if (depotLocal) {
-      this.liste = JSON.parse(depotLocal);
-      console.warn(this.liste);
-    }
+    this.liste = this.planificationService.getPlaning();
+    console.log(this.liste);
+    // const depotLocal = localStorage.getItem('savePlanification');
+    // if (depotLocal) {
+    //   this.liste = JSON.parse(depotLocal);
+    //   console.warn(this.liste);
+    // }
   }
 
   //marquer les repas comme consommées
@@ -54,17 +54,22 @@ export class JournalAlimentaireComponent implements OnInit {
       //mise a jour des repas comme consommée
       repas.consommer = true;
       this.consommer.push(repas);
+      this.saveRepasConsommer();
       console.log('repas consommée est : ', repasId);
 
-
-      //  localStorage.setItem('savePlanification', JSON.stringify(this.liste));
+      localStorage.setItem(`consommer_${repasId}`, JSON.stringify(repas.consommer));
     } else {
 
       console.error("repas introuvable");
     }
 
   }
-
+  getRepasConsomme(repasId: number): boolean {
+    const state : any = localStorage.getItem(`consommer_${repasId}`);
+    this.consommer = JSON.parse(state)
+    return state; 
+  }
+ 
   supprimer(planing: Planification): void {
 
     if (planing) {

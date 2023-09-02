@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RepasService } from '../services/repas.service';
-
+import { RepasComponent } from '../repas/repas.component';
+import { Repas } from '../models/repas';
 
 @Component({
   selector: 'app-edit-repas',
@@ -9,8 +10,9 @@ import { RepasService } from '../services/repas.service';
 })
 export class EditRepasComponent {
 
-  constructor(private service : RepasService) { }
-
+  constructor(private service : RepasService , compo : RepasComponent) { }
+private data : string[] = [];
   ngOnInit() {
+    // this.data = compo.data;
   }
 }

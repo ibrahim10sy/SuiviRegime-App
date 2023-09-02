@@ -39,10 +39,11 @@ export class PlanificationRepasComponent {
     if(this.planingForm.valid){
       const newPlaning = this.planingForm.value as Planification;
       this.planingService.ajoutPlaning(newPlaning);
+      console.log(newPlaning);
       Swal.fire({
         position: 'center-end',
         icon: 'success',
-        title: 'Repas ajouté avec succèss',
+        title: 'Repas planifié avec succèss',
         showConfirmButton: false,
         timer: 1500
       })

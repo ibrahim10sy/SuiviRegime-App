@@ -13,13 +13,10 @@ export class PlanificationService {
 
   constructor(){}
 
-  //sauve planification
-  // savePlanification(){
-  //   localStorage.setItem('listePlaning', JSON.stringify(this.listePlaning));
-  // }
+ 
   // PlanificationService
 savePlanification() {
-  localStorage.setItem('savePlanification', JSON.stringify(this.listePlaning));
+  localStorage.setItem('listePlaning', JSON.stringify(this.listePlaning));
 }
 
 
@@ -36,9 +33,9 @@ savePlanification() {
   getPlaning(){
     let data : any = localStorage.getItem('listePlaning');
     this.listePlaning = JSON.parse(data) || [];
-    console.warn('listePlaning', JSON.stringify(this.listePlaning));
     return this.listePlaning;
   }
+
 
   //suppression
   supprimerPlaning(planing : Planification){
