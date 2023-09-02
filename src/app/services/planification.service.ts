@@ -8,20 +8,42 @@ import { RepasService } from './repas.service';
 })
 export class PlanificationService {
 
-  private listePlaning = [] = [];
+  private listePlaning : Planification []= [];
   private idCount = 1;
 
-  //ajout du planing
+  constructor(){}
 
-  // ajoutPlaning(planing : Planification){
-  //   planing.id = this.idCount;
-  //   this.listePlaning.push(planing);
-  //   this.idCount++;
-  // }
-  // AjoutPlaning(planing : Planification){
-  //   planing.id = this.idCount;
-  //   this.listePlaning.push(planing);
-  //   this.idCount++;
-  // }
+  // PlanificationService
+savePlanification() {
+  localStorage.setItem('savePlanification', JSON.stringify(this.listePlaning));
+}
+
+
+  //methode permettant l'ajout
+  ajoutPlaning(planing : Planification){
+    planing.id = this.idCount;
+    this.listePlaning.push(planing);
+    this.idCount++;
+    console.log(planing)
+    this.savePlanification();
+  }
   
+  //Réccuperation des listes 
+  getPlaning(){
+    let data : any = localStorage.getItem('listePlaning');
+    this.listePlaning = JSON.parse(data) || [];
+    console.warn('listePlaning', JSON.stringify(this.listePlaning));
+    return this.listePlaning;
+  }
+
+  //suppression
+  supprimerPlaning(planing : Planification){
+    const ID = this.listePlaning.findIndex(index => index.id == planing.id);
+
+    if(ID !== -1){
+      this.listePlaning.splice(ID , 1);
+      this.savePlanification();
+    }
+  }
+
 }

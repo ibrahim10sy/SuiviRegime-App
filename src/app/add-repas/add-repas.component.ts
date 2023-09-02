@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Repas } from '../models/repas';
 import { RepasService } from '../services/repas.service';
-
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-repas',
@@ -11,32 +11,76 @@ import { RepasService } from '../services/repas.service';
 })
 export class AddRepasComponent implements OnInit {
 
-  nouveauRepas = new Repas(1, '', '', 0, '');
-
   repasForm!: FormGroup;
-
-  constructor(private formBuilder: FormBuilder, private repasService: RepasService) { }
-
-  ngOnInit() {
+  imageSrc : string | any;
+  constructor(private formBuilder: FormBuilder, private repasService: RepasService) {
     this.repasForm = this.formBuilder.group({
-      id: [null],
       nom: ['', Validators.required],
       description: ['', Validators.required],
       calories: ['', Validators.required],
-      image: [null]
+      image: ['', Validators.required],
     });
+  }
+
+  get f(){
+    return this.repasForm.controls;
+  }
+  
+  ngOnInit() {
+  
   }
 
   onSubmit() {
     if (this.repasForm.valid) {
-      this.nouveauRepas = this.repasForm.value;
-      this.repasService.ajoutRepas(this.nouveauRepas);
-      console.warn(this.nouveauRepas);
+      const nouveauRepas = this.repasForm.value as Repas;
+      this.repasService.ajoutRepas(nouveauRepas);
+      Swal.fire({
+        position: 'center-end',
+        icon: 'success',
+        title: 'Repas ajouté avec succèss',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.repasForm.reset();
     }
   }
 
-  deleteRepas(repas: Repas) {
-    this.repasService.supprimerRepas(repas);
+  //chargement de l'image
+  ImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.repasForm.patchValue({ image: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
   }
+  //prevusialistion de l'image
+  onFileChange(event:any) {
+    const reader = new FileReader();
+    
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+    
+      reader.onload = () => {
+   
+        this.imageSrc = reader.result as string;
+        Swal.fire({
+          imageUrl:this.imageSrc,
+          imageHeight: 150,
+          imageAlt: 'A tall image'
+        })
+        this.repasForm.patchValue({
+          
+          fileSource: reader.result
+          
+        });
+   
+      };
+   
+    }
+  }
+ 
 }

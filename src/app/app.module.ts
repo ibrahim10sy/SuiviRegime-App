@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog'
-// import {NgxPaginationModule} from 'ngx-pagination';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog'
+import Swal from 'sweetalert2'
 
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,10 @@ import { AddRepasComponent } from './add-repas/add-repas.component';
 import { ListeObjectifComponent } from './liste-objectif/liste-objectif.component';
 import { RepasComponent } from './repas/repas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ImageViewComponent } from './image-view/image-view.component';
+import { EditRepasComponent } from './edit-repas/edit-repas.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -23,18 +28,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SuiviObjectifsComponent,
     AddRepasComponent,
     ListeObjectifComponent,
-    RepasComponent
+    RepasComponent,
+    ImageViewComponent,
+    EditRepasComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // NgxPaginationModule,
+    NgxPaginationModule,
     MatDialogModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatCheckboxModule
+   
   ],
-  providers: [],
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MatDialogRef, useValue: {}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

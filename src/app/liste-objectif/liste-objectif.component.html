@@ -1,1 +1,29 @@
+
 <h1>Liste des objectifs</h1>
+
+
+<div class="container">
+    <h1>Liste des objectifs</h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Calories</th>
+            <th>Evolution</th>
+            <th>Action</th>
+        </tr>
+        <tr *ngFor="let liste of listeService">
+            <td>{{liste.id}}</td>
+            <td>{{liste.nom}}</td>
+            <td>{{liste.description}}</td>
+            <td>{{liste.caloriesCibler}}</td>
+            <td>{{liste}}</td>
+            <td>
+                <button class="modifie" (click)="modifier(liste)"><i class='bx bxs-edit'></i></button> 
+                <button class="delete" (click)="supprimer(liste)"><i class='bx bxs-trash-alt'></i></button>
+            </td>
+        </tr>
+    </table>
+</div>
+

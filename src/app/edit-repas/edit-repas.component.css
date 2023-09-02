@@ -114,21 +114,3 @@ input, select, option:focus{
   input[type="file"]::file-selector-button {
     display: none;
   }
-/*   
-  .img input[type="file"]:focus + label {
-    outline: 2px solid #3498db;
-    outline-offset: -2px;
-  }
-  
-  .img input[type="file"]:valid + label {
-    background-color: #27ae60;
-  }
-  
-  .img input[type="file"]:valid + label::before {
-    content: "Fichier sélectionné";
-  }
-  
-  .img input[type="file"]::file-selector-button {
-    display: none;
-  }
-   */

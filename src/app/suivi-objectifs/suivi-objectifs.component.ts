@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Objectif } from '../models/objectif';
 import { ObjectifService } from '../services/objectif.service';
+import { MAT_DIALOG_DATA , MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-suivi-objectifs',
@@ -10,28 +14,54 @@ import { ObjectifService } from '../services/objectif.service';
 })
 export class SuiviObjectifsComponent {
 
-  newObjectifs = new Objectif(1,'','',0);
+
+  // newObjectifs = new Objectif(1,'','',0);
 
   objectifForm ! : FormGroup;
+ 
 
-  constructor(private formBuilder: FormBuilder, private ObjectifService : ObjectifService){}
+  constructor(
+    private formBuilder: FormBuilder,
+    private ObjectifService : ObjectifService ,
+    private dialogRef: MatDialogRef<SuiviObjectifsComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: Objectif | null 
+    @Inject(MAT_DIALOG_DATA) public data: { dataObjectif: Objectif }){
+  //   if(Object.keys(data).length == 0 );
 
-  ngOnInit(){
     this.objectifForm = this.formBuilder.group({
-      id : [null],
+      id : [''],
       nom : ['', Validators.required],
       description : ['', Validators.required],
-      caloriesCibler : []
-    })
+      caloriesCibler : ['', Validators.required]
+    });
+
+    if (Object.keys(data).length == 0) {
+      this.objectifForm.patchValue(data);
+    }
   }
 
   //la methode submit pour envoyer les données du formulaire
 
   onSubmit(){
     if(this.objectifForm.valid){
-      this.newObjectifs = this.objectifForm.value;
-      this.ObjectifService.ajoutObjectif(this.newObjectifs);
-      this.objectifForm.reset();
+
+      const newObjectifs = this.objectifForm.value as Objectif;
+      if(Object.keys(this.data).length !== 0){
+        this.ObjectifService.modifierObjectif(newObjectifs)
+        console.log(this.data)
+      } else{
+        this.ObjectifService.ajoutObjectif(newObjectifs);
+        Swal.fire({
+          position: 'top-left',
+          icon: 'success',
+          title: 'Repas ajouté avec succèss',
+          showConfirmButton: false,
+          timer: 1500
+        })
+         console.log(this.data)
+        this.objectifForm.reset();
+      }
+
     }
   }
 
@@ -40,5 +70,4 @@ export class SuiviObjectifsComponent {
   deleteObjectif(objectif : Objectif){
     this.ObjectifService.supprimerObjectifs(objectif);
   }
-
 }

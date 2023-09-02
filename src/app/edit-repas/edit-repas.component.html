@@ -1,8 +1,8 @@
 
-<h1 mat-dialog-title id="titre">Ajouter un repas</h1>
+<h1 mat-dialog-title id="titre">Modifier le repas</h1>
 <div mat-dialog-content class="mat-typography">
 
-  <form [formGroup]="repasForm" (ngSubmit)="onSubmit()">
+  <form>
     <div class="form-container">
       <div class="input-container">
         <div class="input-field">
@@ -16,16 +16,16 @@
         </div>
       </div>
       <div class="image-container">
-        <input type="file" id="image" class="form-control" formControlName="image"  (change)="onFileChange($event)" (change)="ImageChange($event)">
+        <input type="file" id="image" class="form-control" formControlName="image" >
       </div>
       <div class="img">
-        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px">
+        <!-- <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px"> -->
         <!-- <img src="../../assets/image/repas-rapides.jpg"> -->
       </div>
     </div>
     <div mat-dialog-actions class="actions">
       <button mat-button mat-dialog-close><i class='bx bx-x'></i> Annuler</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!repasForm.valid"> <i class='bx bx-check'></i> Ajouter</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]=""> <i class='bx bx-check'></i> Modifier</button>
     </div>
   </form>
 </div>
