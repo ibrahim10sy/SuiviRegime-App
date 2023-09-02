@@ -52,7 +52,7 @@ export class SuiviObjectifsComponent {
         Swal.fire({
           position: 'top-left',
           icon: 'success',
-          title: 'Repas ajouté avec succèss',
+          title: 'Objectif crée avec succèss',
           showConfirmButton: false,
           timer: 1500
         })

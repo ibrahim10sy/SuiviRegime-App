@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Repas } from '../models/repas';
 import { RepasService } from '../services/repas.service';
 import Swal from 'sweetalert2'
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-repas',
@@ -13,7 +14,7 @@ export class AddRepasComponent implements OnInit {
 
   repasForm!: FormGroup;
   imageSrc : string | any;
-  constructor(private formBuilder: FormBuilder, private repasService: RepasService) {
+  constructor(private formBuilder: FormBuilder, private repasService: RepasService,private dialogRef: MatDialogRef<AddRepasComponent>) {
     this.repasForm = this.formBuilder.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
@@ -34,6 +35,7 @@ export class AddRepasComponent implements OnInit {
     if (this.repasForm.valid) {
       const nouveauRepas = this.repasForm.value as Repas;
       this.repasService.ajoutRepas(nouveauRepas);
+      this.dialogRef.close(nouveauRepas);
       Swal.fire({
         position: 'center-end',
         icon: 'success',

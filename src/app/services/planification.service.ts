@@ -32,7 +32,13 @@ savePlanification() {
   //Réccuperation des listes 
   getPlaning(){
     let data : any = localStorage.getItem('listePlaning');
-    this.listePlaning = JSON.parse(data) || [];
+
+    if(data ){
+      this.listePlaning = JSON.parse(data) || [];
+    } else{
+      this.listePlaning = [];
+    }
+   
     return this.listePlaning;
   }
 

@@ -9,7 +9,6 @@ export class RepasService {
   constructor() { }
 
   private repasListe : Repas [] = [];
-  private repasConsommer : Repas [] = [];
   private idCount = 1;
 
   //stockage local
@@ -35,24 +34,24 @@ export class RepasService {
   
    //suppression
    supprimerRepas(repas: Repas) {
-    const ID = this.repasListe.findIndex(index => index.id === repas.id);
-    if (ID !== -1) {
-      this.repasListe.splice(ID, 1);
+    const index = this.repasListe.findIndex(item => item.id === repas.id);
+    if (index !== -1) {
+      this.repasListe.splice(index, 1);
       this.saveRepas();
     }
   }
   
-  //methode permettant de marquer le repas comme consommée
-
-  repasConsommee(repasId:number):void{
-    const repas = this.repasListe.find(index => index.id === repasId);
-    if(repas){
-      repas.consommer = true;
-      this.repasConsommer.push(repas);
-      this.saveRepas();
+  
+  //modifications 
+  modifierRepas(repas: Repas) {
+    const ID = this.repasListe.findIndex(index => index.id === repas.id);
+  
+    if (ID !== -1) {
+      this.repasListe[ID] = repas; 
+      this.saveRepas(); 
     }
-
   }
+  
 
   isRepasExiste(repasId: number): boolean {
     return this.repasListe.some(r => r.id === repasId);

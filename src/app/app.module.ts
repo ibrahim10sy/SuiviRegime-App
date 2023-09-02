@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog'
-import Swal from 'sweetalert2'
+
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -41,7 +41,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
    
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {}},

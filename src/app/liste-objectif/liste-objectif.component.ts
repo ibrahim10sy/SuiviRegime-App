@@ -22,10 +22,10 @@ export class ListeObjectifComponent implements OnInit {
   ngOnInit(){
     this.journal = this.planingService.getPlaning();
     this.listeService = this.service.getObjectifs();
-    const storageLocal= localStorage.getItem('saveObjectif');
-    if(storageLocal){
-      this.listeService=JSON.parse(storageLocal);
-    }
+    // const storageLocal= localStorage.getItem('saveObjectif');
+    // if(storageLocal){
+    //   this.listeService=JSON.parse(storageLocal);
+    // }
   }
 
   supprimer(objectif : Objectif){

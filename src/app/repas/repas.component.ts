@@ -31,44 +31,16 @@ export class RepasComponent implements OnInit {
     return this.repasService.getRepas();
   }
 
-  supprimerRepas(repas: Repas) {
-
-    this.repasService.supprimerRepas(repas);
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "Attention avous allez supprimer",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire(
-          'Deleted!',
-          'Supprimer avec succèss',
-          'success'
-        )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
-      }
-    })
+  //supprimer
+  supprimer(repas: Repas) {
+    if (repas && repas.id) {
+      this.repasService.supprimerRepas(repas);
+    } else {
+      console.log("Repas non valide : ", repas);
+    }
   }
+
+  //affichage d el'image en gros plan
   afficherImage(repas: Repas) {
     const dialogRef = this.dialog.open(ImageViewComponent, {
       data: { imageUrl: repas.image }
@@ -76,7 +48,7 @@ export class RepasComponent implements OnInit {
   }
 
 
-  openDialog(): void {
+  openDialog(){
     const dialogRefAddRepas = this.dialog.open(AddRepasComponent, {
       width: '500px', // Ajustez la largeur selon vos besoins
     });
@@ -85,9 +57,10 @@ export class RepasComponent implements OnInit {
       console.log('La boîte de dialogue a été fermée', result);
     });
   }
-  openEdit(): void {
+  openEdit(repas:Repas){
     const dialogRefEdit = this.dialog.open(EditRepasComponent, {
-      width: '500px', // Ajustez la largeur selon vos besoins
+      width: '500px', 
+      data: {repas}
     });
 
     dialogRefEdit.afterClosed().subscribe(result => {
