@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { RepasService } from '../services/repas.service';
-import { Repas } from '../models/repas';
+
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { Repas } from '../models/repas';
+import { RepasService } from '../services/repas.service';
 
 
 @Component({
@@ -11,38 +11,41 @@ import Swal from 'sweetalert2';
   templateUrl: './edit-repas.component.html',
   styleUrls: ['./edit-repas.component.css']
 })
-export class EditRepasComponent {
+export class EditRepasComponent implements OnInit {
 
-  editForm !: FormGroup;
-  imageSrc : string | any;
+  @Output() repasUpdated = new EventEmitter<Repas>();
 
-  constructor(private service : RepasService, private fb : FormBuilder, @Inject(MAT_DIALOG_DATA) public data : {repas : Repas} ,private dialogRef: MatDialogRef<EditRepasComponent>,) { }
+  editForm!: FormGroup;
+  imageSrc : string|any;
 
-  ngOnInit() {
-    this.editForm = this.fb.group({
+  constructor(
+    private formBuilder: FormBuilder,
+    private repasService: RepasService,
+    @Inject(MAT_DIALOG_DATA) public data: { repas: Repas },
+    private dialogRef: MatDialogRef<EditRepasComponent>
+  ) {}
+
+  ngOnInit(): void {
+    this.editForm = this.formBuilder.group({
       nom: [this.data.repas.nom, Validators.required],
       description: [this.data.repas.description, Validators.required],
       calories: [this.data.repas.calories, Validators.required],
-      image: ['']
-    });   
-}
+      image: [this.data.repas.image]
+    });
+  }
 
-  onSubmit(){
+  onSubmit() {
     if (this.editForm.valid) {
-
-      const updateRepas: Repas = {
-       
-        id: this.data.repas.id,
-        nom: this.editForm.value.nom,
-        description: this.editForm.value.description,
-        calories: this.editForm.value.calories,
-        image: this.editForm.value.image,
-        consommer : this.editForm.value.consommer
+      const updatedRepas: Repas = {
+        ...this.data.repas, 
+        ...this.editForm.value 
       };
-  
-      this.service.modifierRepas(updateRepas);
-      console.log(updateRepas);  
-      this.dialogRef.close(updateRepas);
+
+      this.repasService.modifierRepas(updatedRepas);
+
+      this.repasUpdated.emit(updatedRepas);
+
+      this.dialogRef.close();
     }
   }
 
@@ -68,7 +71,7 @@ export class EditRepasComponent {
       reader.onload = () => {
    
         this.imageSrc = reader.result as string;
-      
+       
         this.editForm.patchValue({
           
           fileSource: reader.result

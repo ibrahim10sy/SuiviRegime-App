@@ -13,7 +13,6 @@ export class PlanificationService {
 
   constructor(){}
 
- 
   // PlanificationService
 savePlanification() {
   localStorage.setItem('listePlaning', JSON.stringify(this.listePlaning));

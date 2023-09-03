@@ -1,3 +1,4 @@
+
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Objectif } from '../models/objectif';
@@ -5,12 +6,14 @@ import { ObjectifService } from '../services/objectif.service';
 import { MAT_DIALOG_DATA , MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-suivi-objectifs',
   templateUrl: './suivi-objectifs.component.html',
   styleUrls: ['./suivi-objectifs.component.css']
 })
 export class SuiviObjectifsComponent {
+
 
   // newObjectifs = new Objectif(1,'','',0);
 
@@ -37,12 +40,11 @@ export class SuiviObjectifsComponent {
     }
   }
 
-
-
   //la methode submit pour envoyer les données du formulaire
 
   onSubmit(){
     if(this.objectifForm.valid){
+
       const newObjectifs = this.objectifForm.value as Objectif;
       if(Object.keys(this.data).length !== 0){
         this.ObjectifService.modifierObjectif(newObjectifs)
@@ -59,7 +61,7 @@ export class SuiviObjectifsComponent {
          console.log(this.data)
         this.objectifForm.reset();
       }
-      // this.dialogRef.close();
+
     }
   }
 
@@ -68,5 +70,4 @@ export class SuiviObjectifsComponent {
   deleteObjectif(objectif : Objectif){
     this.ObjectifService.supprimerObjectifs(objectif);
   }
-
 }

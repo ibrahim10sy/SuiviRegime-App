@@ -8,6 +8,7 @@ import { SuiviObjectifsComponent } from '../suivi-objectifs/suivi-objectifs.comp
 import Swal from 'sweetalert2'
 
 
+
 @Component({
   selector: 'app-liste-objectif',
   templateUrl: './liste-objectif.component.html',
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2'
 export class ListeObjectifComponent implements OnInit {
 
   listeService : Objectif [] = [];
+
   journal : any[] = []; 
   constructor(private service  : ObjectifService, private planingService : PlanificationService, private dialog: MatDialog){}
 
@@ -92,3 +94,4 @@ export class ListeObjectifComponent implements OnInit {
     });
   }
 }
+

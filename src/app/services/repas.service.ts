@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Repas } from '../models/repas';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class RepasService {
 
   private repasListe : Repas [] = [];
   private idCount = 1;
+  private repasSubject = new BehaviorSubject<Repas[]>([]);
+  repas$ = this.repasSubject.asObservable();
 
   //stockage local
   saveRepas(){
@@ -43,15 +46,25 @@ export class RepasService {
   
   
   //modifications 
+  // modifierRepas(repas: Repas) {
+  //   const ID = this.repasListe.findIndex(index => index.id === repas.id);
+  
+  //   if (ID !== -1) {
+  //     this.repasListe[ID] = repas; 
+  //     this.saveRepas(); 
+  //   }
+  // }
+  
+
   modifierRepas(repas: Repas) {
     const ID = this.repasListe.findIndex(index => index.id === repas.id);
   
     if (ID !== -1) {
       this.repasListe[ID] = repas; 
+      this.repasSubject.next(this.repasListe);
       this.saveRepas(); 
     }
   }
-  
 
   isRepasExiste(repasId: number): boolean {
     return this.repasListe.some(r => r.id === repasId);
