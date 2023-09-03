@@ -34,6 +34,7 @@ export class AddRepasComponent implements OnInit {
     if (this.repasForm.valid) {
       const nouveauRepas = this.repasForm.value as Repas;
       this.repasService.ajoutRepas(nouveauRepas);
+      console.log(nouveauRepas)
       Swal.fire({
         position: 'center-end',
         icon: 'success',

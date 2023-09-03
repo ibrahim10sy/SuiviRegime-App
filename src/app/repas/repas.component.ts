@@ -6,6 +6,8 @@ import { Repas } from '../models/repas';
 import Swal from 'sweetalert2'
 import { ImageViewComponent } from '../image-view/image-view.component';
 import { EditRepasComponent } from '../edit-repas/edit-repas.component';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-repas',
@@ -18,23 +20,22 @@ export class RepasComponent implements OnInit {
   p: number = 1;
   imageSrc: string | any;
 
-  constructor(private repasService: RepasService, private dialog: MatDialog) { }
+  constructor(private repasService: RepasService, private dialog: MatDialog,private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.plat = this.repasService.getRepas();
-    const storageLocal = localStorage.getItem('savePlat');
-    if (storageLocal) {
-      this.plat = JSON.parse(storageLocal)
+  
+     
     }
-  }
+  
   afficherRepas() {
     return this.repasService.getRepas();
   }
 
   supprimerRepas(repas: Repas) {
-
-    this.repasService.supprimerRepas(repas);
-    const swalWithBootstrapButtons = Swal.mixin({
+    if (repas && repas.id) {
+      this.repasService.supprimerRepas(repas);
+      const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
@@ -68,6 +69,10 @@ export class RepasComponent implements OnInit {
         )
       }
     })
+    } else {
+      console.log("Repas non valide : ", repas);
+    }
+  
   }
   afficherImage(repas: Repas) {
     const dialogRef = this.dialog.open(ImageViewComponent, {
@@ -85,13 +90,20 @@ export class RepasComponent implements OnInit {
       console.log('La boîte de dialogue a été fermée', result);
     });
   }
-  openEdit(): void {
+  // Écoute de l'événement de mise à jour
+  openEdit(repas: Repas): void {
     const dialogRefEdit = this.dialog.open(EditRepasComponent, {
-      width: '500px', // Ajustez la largeur selon vos besoins
+      width: '500px',
+      data: { repas }
+    });
+  
+    dialogRefEdit.afterClosed().subscribe((result: Repas) => {
+      if (result) {
+        // Mettez à jour la liste de repas ou rafraîchissez la liste ici
+        this.plat = this.plat.map(item => (item.id === result.id ? result : item));
+        this.cd.detectChanges(); // Force la détection des changements
+      }
     });
 
-    dialogRefEdit.afterClosed().subscribe(result => {
-      console.log('La boîte de dialogue a été fermée', result);
-    });
-  }
+}
 }
