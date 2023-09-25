@@ -13,6 +13,7 @@ export class AppComponent {
   isJournalPage : boolean = false;
   isListeSuiviPage : boolean = false;
   isBlankPage: boolean = false;
+  isPlaningPage : boolean = false;
 
   constructor(private router: Router){
 
@@ -32,6 +33,9 @@ export class AppComponent {
      
       if (event instanceof NavigationEnd) {
         this.isListeSuiviPage = event.url === '/liste';
+      }
+      if (event instanceof NavigationEnd) {
+        this.isPlaningPage = event.url === '/planification';
       }
      
   

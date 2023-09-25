@@ -5,6 +5,7 @@ import { Objectif } from '../models/objectif';
 import { ObjectifService } from '../services/objectif.service';
 import { MAT_DIALOG_DATA , MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { ListeObjectifComponent } from '../liste-objectif/liste-objectif.component';
 
 
 @Component({
@@ -23,21 +24,26 @@ export class SuiviObjectifsComponent {
   constructor(
     private formBuilder: FormBuilder,
     private ObjectifService : ObjectifService ,
-    private dialogRef: MatDialogRef<SuiviObjectifsComponent>,
+    private diaglogRef: MatDialogRef<SuiviObjectifsComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: Objectif | null 
-    @Inject(MAT_DIALOG_DATA) public data: { dataObjectif: Objectif }){
+    @Inject(MAT_DIALOG_DATA) public data: any){
   //   if(Object.keys(data).length == 0 );
-
+console.log(data)
     this.objectifForm = this.formBuilder.group({
-      id : [''],
-      nom : ['', Validators.required],
-      description : ['', Validators.required],
-      caloriesCibler : ['', Validators.required]
+      id : [this.data.id??""],
+      nom : [this.data.nom??"", Validators.required],
+      description : [this.data.description ?? "", Validators.required],
+      jour : [this.data.jour ?? "", Validators.required],
+      caloriesCibler : [this.data.caloriesCibler ?? "", Validators.required]
     });
 
-    if (Object.keys(data).length == 0) {
-      this.objectifForm.patchValue(data);
-    }
+    // if (Object.keys(data).length == 0) {
+    //   this.objectifForm.patchValue(data);
+    // }
+    if (data && data.objectif) {
+    
+      this.objectifForm.patchValue(data.objectif);
+  }
   }
 
   //la methode submit pour envoyer les données du formulaire

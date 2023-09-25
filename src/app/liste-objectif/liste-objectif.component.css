@@ -22,3 +22,27 @@ td button {
 .delete i {
     color: red;
 }
+
+.circular-progress-bar {
+    width: 100px; /* Largeur et hauteur souhaitées pour la barre de progression circulaire */
+    height: 100px;
+    border-radius: 50%; /* Crée une forme circulaire */
+    overflow: hidden; /* Cache les coins dépassants */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mat-progress-bar-fill::after {
+    content: ''; /* Contenu vide nécessaire pour le pseudo-élément */
+    width: 100px; /* Même largeur que la barre de progression */
+    height: 100px; /* Même hauteur que la barre de progression */
+    border-radius: 50%; /* Crée une forme circulaire */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(90deg); /* Rotation pour faire démarrer la progression du haut */
+    background-color: #1976d2; /* Couleur de remplissage de la barre de progression */
+  }
+  

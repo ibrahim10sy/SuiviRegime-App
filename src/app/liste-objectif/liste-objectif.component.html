@@ -1,7 +1,4 @@
 
-<h1>Liste des objectifs</h1>
-
-
 <div class="container">
     <h1>Liste des objectifs</h1>
     <table>
@@ -9,6 +6,7 @@
             <th>#</th>
             <th>Nom</th>
             <th>Description</th>
+            <th>Jour</th>
             <th>Calories</th>
             <th>Evolution</th>
             <th>Action</th>
@@ -17,8 +15,10 @@
             <td>{{liste.id}}</td>
             <td>{{liste.nom}}</td>
             <td>{{liste.description}}</td>
+            <td>{{liste.jour}}</td>
             <td>{{liste.caloriesCibler}}</td>
-            <td>{{liste}}</td>
+            <td> <progress max="100" [value]=""></progress></td>
+            <!-- <td> <mat-progress-bar  mode="determinate" class="circular-progress-bar"></mat-progress-bar></td> -->
             <td>
                 <button class="modifie" (click)="modifier(liste)"><i class='bx bxs-edit'></i></button> 
                 <button class="delete" (click)="supprimer(liste)"><i class='bx bxs-trash-alt'></i></button>

@@ -19,6 +19,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ImageViewComponent } from './image-view/image-view.component';
 import { EditRepasComponent } from './edit-repas/edit-repas.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BrowserAnimationsModule,
     HttpClientModule,
     MatCheckboxModule,
-
+    MatProgressBarModule,
+    Ng2SearchPipeModule,
+    FormsModule
    
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {}},

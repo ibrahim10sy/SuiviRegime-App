@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , Inject, OnInit } from '@angular/core';
 import { ObjectifService } from '../services/objectif.service';
 import { Objectif } from '../models/objectif';
 import { JournalAlimentaireComponent } from '../journal-alimentaire/journal-alimentaire.component';
@@ -19,16 +19,32 @@ export class ListeObjectifComponent implements OnInit {
   listeService : Objectif [] = [];
 
   journal : any[] = []; 
-  constructor(private service  : ObjectifService, private planingService : PlanificationService, private dialog: MatDialog){}
+
+  constructor(
+    private service  : ObjectifService,
+    private planingService : PlanificationService,
+    private dialog: MatDialog){}
+
 
   ngOnInit(){
     this.journal = this.planingService.getPlaning();
     this.listeService = this.service.getObjectifs();
-    // const storageLocal= localStorage.getItem('saveObjectif');
-    // if(storageLocal){
-    //   this.listeService=JSON.parse(storageLocal);
-    // }
+
+   
+        // return this.journalComponent.consoCalorique();
+   
   }
+
+  // calorieTotal(){
+  //   return this.journalComponent.consoCalorique();
+  // }
+
+  modifier(objectif: any) {
+    // console.log(objectif);
+    const dialogRef = this.dialog.open(SuiviObjectifsComponent, {
+      data: objectif
+    });
+}
 
   supprimer(objectif : Objectif){
     if(objectif.id && objectif){
@@ -72,13 +88,13 @@ export class ListeObjectifComponent implements OnInit {
     }
   }
 
-  //Calule de l'evolution du conso calorique
+  // Calule de l'evolution du conso calorique
   // calculerCalories(objet : Objectif){
   //   objet.caloriesCibler = objet.caloriesCibler + objet.caloriesCibler * 0.1;
   // }
 
   // calculer(objectif: Objectif) {
-  //   const total = this.journal.find(j => j.calories).length;
+  //   const total = this.journal.find(j => j.calories);
   //   this.listeService.forEach(objet => {
   //     objet.caloriesCibler =total + objet.caloriesCibler * 0.1
   //   });
@@ -88,10 +104,22 @@ export class ListeObjectifComponent implements OnInit {
   //    data: objet
   //   })
   // }
-  modifier(objectif: Objectif) {
-    const dialogRef = this.dialog.open(SuiviObjectifsComponent, {
-      data: { dataObjectif: objectif }
-    });
-  }
+ 
+
+  // suiviEvolution(objectif: Objectif){
+  //   const calorieConso = this.calorieTotal();
+
+  //   if(calorieConso > objectif.caloriesCibler){
+  //     console.log("Dépassement de l'objectif calorique")
+  //   } else if(calorieConso == objectif.caloriesCibler ) {
+  //     console.log("Objectif atteint");
+  //   } else if(calorieConso < objectif.caloriesCibler) {
+  //      console.log( "Objectif non  atteint"); 
+  //     } else {
+  //       console.log("Vous suivez votre objectif de calories.");
+  //     }
+  // }
+
+
 }
 

@@ -117,5 +117,17 @@ export class JournalAlimentaireComponent implements OnInit {
 
 
   }
+
+  //calorie consommée
+  consoCalorique(){
+    let total = 0;
+
+    for(const repas of this.consommer){
+      total += repas.calories;
+    }
+
+    return total;
+  }
+  
 }
 

@@ -44,6 +44,7 @@ export class AddRepasComponent implements OnInit {
         timer: 1500
       })
       this.repasForm.reset();
+      this.dialogRef.close();
     }
   }
 

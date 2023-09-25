@@ -3,7 +3,7 @@
     <h1 *ngIf="!data">Objectifs d'utilisation</h1>
     <h1 *ngIf="data">modifier d'utilisation</h1>
 
-    <div class="link">
+    <div class="link" *ngIf="data!">
         <a routerLink="/liste">Liste des objectifs</a>
     </div>
    
@@ -19,7 +19,10 @@
           <input type="text" id="description" formControlName="description" required placeholder="Description">
         </div>
         <div>
-            <input class="calorie" type="number"  formControlName="caloriesCibler" placeholder="calories cibler" required>
+          <input type="date" id="description" formControlName="jour" required placeholder="jour">
+        </div>
+        <div>
+            <input type="number"  formControlName="caloriesCibler" placeholder="calories cibler" required>
           </div>
 
           <button  type="submit" [disabled]="!objectifForm.valid">{{data !== undefined ? 'Modifier': 'Ajouter'}}</button>
